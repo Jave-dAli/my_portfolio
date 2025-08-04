@@ -1,20 +1,23 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import About from './pages/About';
+import Projects from './pages/Projects';
+import Contact from './pages/Contact';
 
 function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_BASE_URL}/`)
-      .then(res => setMessage(res.data))
-      .catch(err => setMessage('Failed to connect to backend'));
-  }, []);
-
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>My Portfolio</h1>
-      <p>{message}</p>
-    </div>
+    <Router>
+      <Navbar />
+      <div style={{ padding: '1rem' }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
